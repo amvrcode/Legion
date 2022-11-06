@@ -8,10 +8,15 @@ import { CategoryModule } from './models/category/category.module'
 import { ProductModule } from './models/product/product.module'
 import { UserModule } from './models/user/user.module'
 import { OrderModule } from './models/order/order.module'
+import { ServeStaticModule} from '@nestjs/serve-static';
+import * as path from 'path'; // New
 import { AdminAlertsModule } from './admin-alerts/admin-alerts.module'
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({ // New
+      rootPath: path.join(__dirname, '..', 'client/dist'), // New
+    }),
     PostgresDatabaseProviderModule,
     MailerProviderModule,
     NestjsTelegrafProviderModule,
