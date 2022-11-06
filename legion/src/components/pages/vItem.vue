@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { instance } from '../../utils/axios';
 
 export default {
     name: 'vItem',
@@ -92,13 +92,13 @@ export default {
         async getItemObject() {
             let itemId = this.$route.params.itemId
 
-            const {data} = await axios.get(`product/${itemId}`)
+            const {data} = await instance.get(`product/${itemId}`)
             this.itemObject = data
         },
         async createOrder(id) {
             let orderItemId = Number(id)
         
-            const {data} = await axios.post('order/create', { itemId: orderItemId }, {headers: { 'Authorization': `${localStorage.getItem('userKey')}`}})
+            const {data} = await instance.post('order/create', { itemId: orderItemId }, {headers: { 'Authorization': `${localStorage.getItem('userKey')}`}})
             window.open(data)
         },
         scrollTo(to, duration = 0) {

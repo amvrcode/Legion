@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { instance } from '../../utils/axios';
 
 export default {
     name: 'vItemCard',
@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         async getItems() {
-            const {data} = await axios.get('product')
+            const {data} = await instance.get('product')
             this.items = data
         },
         sendItemId(id) {

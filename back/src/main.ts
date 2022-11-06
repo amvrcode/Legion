@@ -8,6 +8,7 @@ import { ResponceInterceptor } from './core/interceptors/responce.interceptor'
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true })
 
+  app.setGlobalPrefix("api")
   app.use(cookieParser())
   app.use(compression())
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)))

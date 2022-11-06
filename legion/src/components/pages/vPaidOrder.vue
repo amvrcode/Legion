@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { instance } from '../../utils/axios';
 
 export default {
     name: 'vPaidOrder',
@@ -126,7 +126,7 @@ export default {
     },
     methods: {
         async getOrder() {
-            const {data} = await axios.get(`order/${this.$route.params.orderId}`)
+            const {data} = await instance.get(`order/${this.$route.params.orderId}`)
             this.inputs = data.product.inputs
 
             this.request__inputs = this.inputs.map(item => {
@@ -159,7 +159,7 @@ export default {
             if (this.request__inputs.filter(item => item.value == '').length) {
                 this.null__inputs = true
             } else {
-                await axios.post('order/setInputs', {
+                await instance.post('order/setInputs', {
                 email: this.order__email,
                 path: this.$route.params.orderId,
                 inputs: this.request__inputs
@@ -169,7 +169,7 @@ export default {
             }
         },
         async setExtraCod() {
-            await axios.post('order/setExtraInput', {
+            await instance.post('order/setExtraInput', {
                 extra: this.extra__cod,
                 path: this.$route.params.orderId
             }).then(()=> {

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { instance } from '../../utils/axios';
 
 export default {
     name: 'vCategoryItem',
@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         async getCategories() {
-            const {data} = await axios.get('category')
+            const {data} = await instance.get('category')
             this.categories = [
                 {
                     id: 'popular',

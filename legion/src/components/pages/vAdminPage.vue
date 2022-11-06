@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { instance } from '../../utils/axios';
 
 (function(){
 var x = document.getElementById('content');
@@ -134,23 +134,23 @@ export default {
     },
     methods: {
         async add__category() {
-            await axios.post('category', 
+            await instance.post('category',
             { title: this.category__name, img: this.category__img },
             { headers: { 'Authorization': `${localStorage.getItem('userKey')}` }}
             )
         },
         async get__categories() {
-            const {data} = await axios.get('category')
+            const {data} = await instance.get('category')
             this.categories = data
         },
         async get__items() {
-            const {data} = await axios.get('product')
+            const {data} = await instance.get('product')
             this.items = data
         },
         async add__item() {
             let price__number = Number(this.item__price)
         
-            await axios.post('product', 
+            await instance.post('product',
             {
                 title: this.item__title,
                 categoryId: this.item__category,

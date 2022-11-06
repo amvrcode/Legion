@@ -98,9 +98,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-
-axios.defaults.baseURL = 'http://donutgame.ru'
+import { instance } from '../../utils/axios';
 
 export default {
     name: 'vMainPage',
@@ -113,7 +111,7 @@ export default {
         async userIndificate() {
             const user__key = localStorage.getItem('userKey')
             if (!user__key) {
-                const {data} = await axios.post('user')
+                const {data} = await instance.post('/user')
                 localStorage.setItem('userKey', data.key)
             }
         },
